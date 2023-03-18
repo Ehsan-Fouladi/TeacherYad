@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سایت معلم ها</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static "img/photo.jpg" %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static "css/bootstrap.rtl.css" %}">
+    <link rel="stylesheet" href="{% static "css/bootstrap.rtl.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <!-- font web -->
+    <style>
+        @font-face {
+            font-family: Vazir;
+            font-style: normal;
+            font-weight: normal;
+            src: url('{% static "fonts/Vazir.eot" %}');
+            src: url('{% static "fonts/Vazir.eot?#iefix" %}') format('embedded-opentype'),
+            url('{% static "fonts/Vazir.woff2" %}') format('woff2'),
+            url('{% static "fonts/Vazir.woff" %}') format('woff'),
+            url('{% static "fonts/Vazir.ttf" %}') format('truetype');
+        }
+
+        @font-face {
+            font-family: Vazir;
+            font-style: normal;
+            font-weight: bold;
+            src: url('{% static "fonts/Vazir-Bold.eot" %}');
+            src: url('{% static "fonts/Vazir-Bold.eot?#iefix" %}') format('embedded-opentype'),
+            url('{% static "fonts/Vazir-Bold.woff2" %}') format('woff2'),
+            url('{% static "fonts/Vazir-Bold.woff" %}') format('woff'),
+            url('{% static "fonts/Vazir-Bold.ttf" %}') format('truetype');
+        }
+
+        body {
+            font-family: 'Vazir', Arial, sans-serif;
+            font-weight: normal;
+        }
+    </style>
+    <!-- font web -->
+</head>
+<body class="container">
+<video autoplay muted loop id="bg-video">
+    <source src="{% static "video/mixkit-focus-on-a-stack-of-books-in-a-library-21597.mp4" %}" type="video/mp4">
+</video>
+
+<div class="text-center">
+    <a href="{% url "home:home" %}" data-page-no="2" class="btn btn-primary tm-intro-btn tm-page-link">
+        برگشت به صفحه قبلی
+    </a>
+</div>
+
+<form class="d-flex search form-floating" method="get" action="{% url 'post:search' %}">
+    <input class="form-control me-2" id="searchuser" name="q" type="search" aria-label="Search"
+           placeholder="searchuser">
+    <label for="searchuser">جست و جو...!؟</label>
+    <!-- <button class="btn btn-primary" type="submit"><img src="img/search_black_18dp.svg"></button> -->
+</form>
+
+<div class="row row-cols-1 row-cols-md-3 g-4 style">
+    {% for teacher in object_list %}
+        {% if teacher.is_teacher %}
+            <div class="col">
+                <div class="card">
+                    <img src="{{ teacher.image.url }}" class="img-fluid" alt="img">
+                    <div class="card-header">
+                        <h5 class="card-title">{{ teacher.username }}</h5>
+                        <h6 class="card-subtitle">{{ teacher.name_field }}</h6>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{ teacher.discription|striptags|truncatechars:20 }}
+                            <a href="{% url "post:user_Detail" teacher.pk %}" class="btn btn-outline-primary">ادامه
+                                مطلب</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+
+<nav aria-label="Page navigation example">
+    {% if page_obj.has_other_pages %}
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=
+                            {{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"
+                       tabindex="-1"
+                       aria-disabled="true">قبلی</a>
+                </li>
+            {% endif %}
+            {% for item in page_obj.paginator.page_range %}
+                {% if page_obj.number == item %}
+                    <li class="page-item active"><a class="page-link" href="?page=
+                            {{ item }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ item }}</a></li>
+                {% else %}
+                    <li class="page-item"><a class="page-link" href="?page=
+                            {{ item }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ item }}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=
+                            {{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">بعدی</a>
+                </li>
+            {% endif %}
+        </ul>
+    {% endif %}
+</nav>
+
+<script src="{% static "js/bootstrap.bundle.min.js" %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

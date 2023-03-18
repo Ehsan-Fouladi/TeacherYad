@@ -1,0 +1,112 @@
+/* my style */
+nav{
+    margin-top: 30px;
+}
+.style{
+    margin: auto;
+}
+img {
+    /* border: 1px solid #ddd;
+    padding: 11px; */
+    border-radius: 50px;
+    width: 150px;
+}
+button img{
+    height: auto;
+    width: 35px;
+}
+.background-image{
+    background-color: white;
+}
+.resize {
+    width: 500px;
+    height: auto;
+    margin: auto;
+    margin-top: -45px;
+}
+@media only screen and (max-width: 480px) {
+    .resize {
+        width: 500px;
+        height: auto;
+        margin: auto;
+        margin-top: 10px;
+    }
+}
+@media only screen and (max-width: 990px) {
+    .resize {
+        width: 360px;
+        height: auto;
+        margin: auto;
+        margin-top: 10px;
+    }
+}
+form{
+    max-width: 497px;
+    margin-right: 353px;
+    margin-left: 406px;
+    margin-top: -52px;
+}
+@media only screen and (max-width: 480px) {
+    .search {
+        max-width: 500px;
+        margin-right: 20px;
+        margin-left: 20px;
+        margin-top: 5px;
+    }
+}
+@media only screen and (max-width: 622px) {
+    .search {
+        max-width: 500px;
+        margin-right: 20px;
+        margin-left: 20px;
+        margin-top: 5px;
+    }
+}
+@media only screen and (max-width: 810px) {
+    .search {
+        max-width: 500px;
+        margin-right: 20px;
+        margin-left: 20px;
+        margin-top: 5px;
+    }
+}
+@media only screen and (max-width: 990px) {
+    .search {
+        max-width: 500px;
+        margin-right: 20px;
+        margin-left: 20px;
+        margin-top: 5px;
+    }
+}
+#bg-video {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    bottom: auto;
+    right: auto;
+    min-width: 100%;
+    min-height: 100%;
+    transform: translateX(-50%) translateY(-50%);
+    z-index: -100;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.text-center{
+    margin: 1%;
+    margin-right: 65%;
+}
+@media only screen and (max-width: 480px) {
+    .text-center {
+        margin: 2%;
+    }
+}
+.card-img-top {
+    width: 35%;
+}
+@media only screen and (max-width: 990px) {
+    .card-img-top {
+        width: 100%;
+    }
+}
+/* my style */

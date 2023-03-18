@@ -1,0 +1,263 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معلم یاد</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static "img/photo.jpg" %}">
+    <link rel="stylesheet" href="{% static "css/bootstrap.rtl.css" %}">
+    <link rel="stylesheet" href="{% static "css/bootstrap.rtl.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/slick.css" %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static "css/templatemo-style.css" %}">
+    <!-- font web -->
+    <style>
+        @font-face {
+            font-family: Vazir;
+            font-style: normal;
+            font-weight: normal;
+            src: url('{% static "fonts/Vazir.eot" %}');
+            src: url('{% static "fonts/Vazir.eot?#iefix" %}') format('embedded-opentype'),
+            url('{% static "fonts/Vazir.woff2" %}') format('woff2'),
+            url('{% static "fonts/Vazir.woff" %}') format('woff'),
+            url('{% static "fonts/Vazir.ttf" %}') format('truetype');
+        }
+
+        @font-face {
+            font-family: Vazir;
+            font-style: normal;
+            font-weight: bold;
+            src: url('{% static "fonts/Vazir-Bold.eot" %}');
+            src: url('{% static "fonts/Vazir-Bold.eot?#iefix" %}') format('embedded-opentype'),
+            url('{% static "fonts/Vazir-Bold.woff2" %}') format('woff2'),
+            url('{% static "fonts/Vazir-Bold.woff" %}') format('woff'),
+            url('{% static "fonts/Vazir-Bold.ttf" %}') format('truetype');
+        }
+
+        body {
+            font-family: 'Vazir', Arial, sans-serif;
+            font-weight: normal;
+        }
+    </style>
+    <!-- font web -->
+</head>
+<body>
+<video autoplay muted loop id="bg-video">
+    <source src="{% static "video/mixkit-focus-on-a-stack-of-books-in-a-library-21597.mp4" %}" type="video/mp4">
+</video>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert" dir="rtl">
+            <strong>{{ message }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+{% endif %}
+
+<div class="page-container">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="cd-slider-nav">
+                    <nav class="navbar navbar-expand-lg" id="tm-nav">
+                        <a class="navbar-brand" href="#">معلم یاد</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbar-supported-content" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse good" id="navbar-supported-content">
+                            <ul class="navbar-nav mb-2 mb-lg-0">
+                                <li class="nav-item selected">
+                                    <a class="nav-link" aria-current="page" href="#0" data-no="1">خانه</a>
+                                    <div class="circle"></div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#0" data-no="2">عکس ها</a>
+                                    <div class="circle"></div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#0" data-no="3">درباره ما</a>
+                                    <div class="circle"></div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#0" data-no="4">پشتیبانی</a>
+                                    <div class="circle"></div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link" href="#" role="button" id="dropdownMenuLink"
+                                       data-bs-toggle="dropdown" aria-expanded="false" data-no="5"><img
+                                            src="{% static "img/account_circle_black_36dp.svg" %}"></a>
+                                    {% if request.user.is_authenticated %}
+                                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink">
+                                            <li><a class="dropdown-item"
+                                                   href="{% url "account:panel_user" %}">داشبورد</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li><a class="dropdown-item" href="{% url "account:logout" %}">خروج</a></li>
+                                        </ul>
+                                    {% else %}
+                                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink">
+                                            <li><a class="dropdown-item" href="{% url "account:register" %}">ثبت نام</a>
+                                            </li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li><a class="dropdown-item" href="{% url "account:login" %}">ورود</a></li>
+                                        </ul>
+                                    {% endif %}
+                                    <div class="circle"></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid tm-content-container">
+        <ul class="cd-hero-slider mb-0 py-5">
+            <li class="px-3" data-page-no="1">
+                <div class="page-width-1 page-left">
+                    <div class="d-flex position-relative tm-border-top tm-border-bottom intro-container">
+                        {% for us in about %}
+                        <div class="intro-left tm-bg-dark">
+                            <h2 class="mb-4">{{ us.title }}</h2>
+                            <p class="mb-4">{{ us.subject|safe }}</p>
+                            <p class="mb-0">
+                        </div>
+                        <div class="intro-right">
+                            <img src="{{ us.image.url }}" alt="Image" class="img-fluid intro-img-1">
+                            <img src="{{ us.image2.url }}" alt="Image" class="img-fluid intro-img-2" width="300" height="300">
+                        </div>
+                        {% endfor %}
+                        <div class="circle intro-circle-1"></div>
+                        <div class="circle intro-circle-2"></div>
+                        <div class="circle intro-circle-3"></div>
+                        <div class="circle intro-circle-4"></div>
+                    </div>
+                    <div class="text-center">
+                        <a href="#0" data-page-no="2" class="btn btn-primary tm-intro-btn tm-page-link">
+                            عکس ها
+                        </a>
+                    </div>
+                </div>
+            </li>
+            <li data-page-no="2">
+                <div class="text-center">
+                    <a href="{% url "post:Detail" %}" data-page-no="2"
+                       class="btn btn-primary tm-intro-btn tm-page-link">
+                        تمامی عکس ها
+                    </a>
+                </div>
+                <!-- Image Carousel -->
+                <div class="mx-auto position-relative gallery-container">
+                    <div class="circle intro-circle-1"></div>
+                    <div class="circle intro-circle-2"></div>
+                    <div class="mx-auto tm-border-top gallery-slider">
+                        {% for teacher in teacher %}
+                            {% if teacher.is_teacher %}
+                                <figure >
+                                    <img src="{{ teacher.image.url }}" alt="Image">
+                                    <figcaption>
+                                        <div class="badge bg-primary">
+                                            <p>{{ teacher.username }}</p>
+                                            <p>{{ teacher.name_field }}</p>
+                                        </div>
+                                        <a href="{% url "post:user_Detail" teacher.pk %}"></a>
+                                    </figcaption>
+                                </figure>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </li>
+            <li data-page-no="3" class="px-3">
+                <div class="position-relative page-width-1 page-right tm-border-top tm-border-bottom">
+                    <div class="circle intro-circle-1"></div>
+                    <div class="circle intro-circle-2"></div>
+                    <div class="circle intro-circle-3"></div>
+                    <div class="circle intro-circle-4"></div>
+                    <div class="tm-bg-dark content-pad">
+                        <h2 class="mb-4">درباره ما</h2>
+                        {% for us in about %}
+                        <p class="mb-4">
+                            <span>{{ us.description|safe }}</span>
+                        </p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </li>
+            <li data-page-no="4">
+                <div class="mx-auto page-width-2">
+                    <div class="row">
+                        <div class="col-md-6 me-0 ms-auto">
+                            <h2 class="mb-4">پشتیبانی</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 tm-contact-left">
+                            <form method="post" class="contact-form">
+                                {% csrf_token %}
+                                <div class="input-group tm-mb-30">
+                                    <input name="name" type="text"
+                                           class="form-control rounded-0 border-top-0 border-end-0 border-start-0"
+                                           placeholder="نام">
+                                </div>
+                                <div class="input-group tm-mb-30">
+                                    <input name="email" type="text"
+                                           class="form-control rounded-0 border-top-0 border-end-0 border-start-0"
+                                           placeholder="ایمیل">
+                                </div>
+                                <div class="input-group tm-mb-30">
+                                    <textarea rows="5" name="message"
+                                              class="textarea form-control rounded-0 border-top-0 border-end-0 border-start-0"
+                                              placeholder="موضوع"></textarea>
+                                </div>
+                                <div class="input-group justify-content-end">
+                                    <input type="submit" class="btn btn-primary tm-btn-pad-2" value="ارسال">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-6 tm-contact-left">
+                            {% for us in about %}
+                            <p class="mb-4">
+                                {{ us.text|safe }}
+                            </p>
+                            <div dir="rtl">
+                                ایمیل: <a href="mailto:info@company.com" class="tm-link-white">{{ us.email }}</a>
+                            </div>
+                            <div class="tm-mb-45" dir="rtl">
+                                تلفن: <a href="tel:0100200340" class="tm-link-white">{{ us.phone }}</a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="container-fluid">
+        <!-- <footer class="row mx-auto tm-footer">
+          <div class="col-md-6 px-0">
+            &copy;.هرگونه کپی برداری حرام است
+          </div>
+        </footer> -->
+    </div>
+</div>
+<div id="loader-wrapper">
+    <div id="loader"></div>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+</div>
+
+<script src="{% static "js/bootstrap.bundle.min.js" %}"></script>
+<script src="{% static "js/jquery-3.5.1.min.js" %}"></script>
+<script src="{% static "js/bootstrap.min.js" %}"></script>
+<script src="{% static "js/slick.js" %}"></script>
+<script src="{% static "js/templatemo-script.js" %}"></script>
+</body>
+</html>
