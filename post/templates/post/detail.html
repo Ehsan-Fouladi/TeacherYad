@@ -62,18 +62,18 @@
         <h5 class="card-comment"> سابقه تحصیلی: {{ object.teaching }}</h5>
     </div>
     <div class="card-body">
-        <p class="card-text">{{ object.discription|safe }}</p>
-        <a class="text text-danger" download> مشاهده رزومه :{{ object.view_resume.url }}</a>
+        <p class="card-text">{{ object.discription|safe }} <a class="text text-primary"
+                                                              href="{{ object.view_resume.url }}"> مشاهده رزومه</a></p>
     </div>
     <div class="card-footer">
-        <small class="text-muted">{{ object.data_time }}</small>
+        <small class="text-muted">تاریخ ایجاد: {{ object.get_jalali_data }}</small>
         <div class="heart">
             {% if is_like %}
                 <a href="{% url 'post:like' teacher.id teacher.pk %}" class="fa fa-heart" id="heart"><span
-                id="count">{{ teacher.likes.all.count }}</span></a>
+                        id="count">{{ teacher.likes.all.count }}</span></a>
             {% else %}
-            <a href="{% url 'post:like' teacher.id teacher.pk %}" class="fa fa-heart-o" id="heart"><span
-                id="count">{{ teacher.likes.all.count }}</span></a>
+                <a href="{% url 'post:like' teacher.id teacher.pk %}" class="fa fa-heart-o" id="heart"><span
+                        id="count">{{ teacher.likes.all.count }}</span></a>
             {% endif %}
         </div>
     </div>
@@ -83,7 +83,7 @@
 <script src="{% static "js/bootstrap.bundle.min.js" %}"></script>
 <script src="{% static "js/jquery-3.5.1.min.js" %}"></script>
 <script>
-    function like(id , pk) {
+    function like(id, pk) {
         let element = document.getElementById("heart")
         let count = document.getElementById("count")
         $.get(`/Post/like/${id}/${pk}`).then(response => {

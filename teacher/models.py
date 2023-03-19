@@ -1,7 +1,7 @@
 from django.db import models
 from account.models import User
 from django.utils.html import format_html
-
+from jalali_date import datetime2jalali
 class Teacher(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_teacher', default=False)
     username = models.CharField(unique=True, max_length=100, verbose_name="نام")
@@ -24,6 +24,9 @@ class Teacher(models.Model):
 
     def __str__(self):
         return f"{self.is_teacher}/{self.username}"
+
+    def get_jalali_data(self):
+        return datetime2jalali(self.data_time).strftime('%Y/%m/%d _ %H:%M')
 
     class Meta:
         ordering = ("-name_field",)
