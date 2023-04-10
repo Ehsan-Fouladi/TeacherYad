@@ -42,7 +42,7 @@
         </div>
     {% endfor %}
     <!-- /.login-logo -->
-    <div class="card" id="app">
+    <div class="card">
         <div class="card-body login-card-body">
             <p class="login-box-msg">ورود به سایت</p>
 
@@ -67,9 +67,9 @@
                 <div class="row">
                     <div class="col-8">
                         <div class="icheck-primary form-check-inline btn-check">
-                            <div class="toggle-password" @click="changeEye">
-                                <input type="checkbox" id="agreeTerms" name="terms" value="agree"
-                                       class="form-check">
+                            <div class="toggle-password">
+                                <input type="checkbox" name="terms" value="agree"
+                                       class="form-check" id="check" onclick="ShowPassword()">
                             </div>
                             نمایش گذرواژه
                         </div>
@@ -85,14 +85,6 @@
                     {{ form.captcha }}
                 </div>
             </form>
-
-            <div class="social-auth-links text-center mb-3">
-                <p>- OR -</p>
-                <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-block btn-danger">
-                    <i class="fab fa-google-plus mr-2"></i>
-                    ورود با گوگل
-                </a>
-            </div>
             <!-- /.social-auth-links -->
             <p class="mb-0">
                 <a href="{% url 'password_reset' %}" class="text-center">رمز را فراموش کردم؟</a>
@@ -108,27 +100,17 @@
 
 <!-- jQuery -->
 <script src="{% static "adminlte/plugins/jquery/jquery.min.js" %}"></script>
-<script src="{% static "js/vue.min.js" %}"></script>
 <!-- Bootstrap 4 -->
 <script src="{% static "adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
 <script>
-    new Vue({
-        el: "#app",
-        data: {
-            togglePassword: document.getElementsByClassName('toggle-password')
-        },
-        methods: {
-            changeEye: function () {
-                if (document.getElementById('password-field').type == "text") {
-                    document.getElementById('password-field').type = "password"
-                    this.togglePassword[0].classList.remove('active')
-                } else {
-                    document.getElementById('password-field').type = "text"
-                    this.togglePassword[0].classList.add('active')
-                }
-            }
+    function ShowPassword() {
+        let pass = document.getElementById('pass');
+        if (document.getElementById('check').checked) {
+            pass.setAttribute('type', 'text');
+        } else {
+            pass.setAttribute('type', 'password');
         }
-    })
+    }
 </script>
 </body>
 </html>

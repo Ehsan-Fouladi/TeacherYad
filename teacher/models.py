@@ -5,10 +5,10 @@ from jalali_date import datetime2jalali
 class Teacher(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_teacher', default=False)
     username = models.CharField(unique=True, max_length=100, verbose_name="نام")
-    name_field = models.CharField(max_length=100, verbose_name="رشته")
+    name_field = models.CharField(max_length=100, verbose_name="رشته تدریس")
     Foundation = models.CharField(max_length=15, verbose_name='پایه')
-    entrance = models.CharField(max_length=20, verbose_name="رتبه کنکور")
-    teaching = models.CharField(max_length=50, verbose_name=" چندسال سابقه تحصیلی")
+    entrance = models.CharField(max_length=20, verbose_name="رتبه کنکور", blank=True, null=True)
+    teaching = models.CharField(max_length=50, verbose_name=" چندسال سابقه تدریس")
     discription = models.TextField(verbose_name="توضیحات کوتاه")
     image = models.ImageField(upload_to='Teacher', verbose_name="عکس")
     view_resume = models.FileField(upload_to='CV', verbose_name="ارسال رزومه", blank=True, null=True)

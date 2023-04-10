@@ -48,15 +48,15 @@ class UserChangeForm(forms.ModelForm):
 class LoginForm(forms.Form):
     email = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'ایمیل'}))
     password = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'گذرواژه', 'id': 'password-field'}))
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'گذرواژه', 'id': 'pass'}))
     captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
 
 class RegisterForm(forms.Form):
     email = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'ایمیل'}))
     password1 = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'گذرواژه', 'id': 'password-field'}))
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'گذرواژه', 'id': 'pass'}))
     password2 = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'تکرار گذرواژه'}))
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'تکرار گذرواژه', 'id':'pass2'}))
     is_teacher = forms.CharField(
         widget=forms.CheckboxInput(attrs={'class': 'form-control'}), required=False)
     captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())

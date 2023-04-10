@@ -16,8 +16,8 @@
     <link rel="stylesheet" href="{% static "adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css" %}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{% static "adminlte/dist/css/adminlte.min.css" %}">
-    <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- style -->
+    <link rel="stylesheet" href="{% static "css/style_login_register.css" %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 </head>
 <body class="hold-transition register-page">
@@ -41,7 +41,7 @@
             </button>
         </div>
     {% endfor %}
-    <div class="card" id="app">
+    <div class="card">
         <div class="card-body register-card-body">
             <p class="login-box-msg">.برای ورود به سایت ثبت نام کنید</p>
 
@@ -71,45 +71,36 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-8">
-                    <div class="icheck-primary form-check-inline btn-check">
+                <div>
+                    <div class="icheck-primary form-check-inline btn-check check-password">
                         <div class="toggle-password">
-                            {{ form.is_teacher }}
+                            <input type="checkbox" name="terms" value="agree"
+                                   class="form-check" id="check" onclick="password()">
                         </div>
-                        ایا معلم هستید؟
+                        نمایش گذرواژه
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-8">
-                        <div class="icheck-primary form-check-inline btn-check">
-                            <div class="toggle-password" @click="changeEye">
-                                <input type="checkbox" id="agreeTerms" name="terms" value="agree"
-                                       class="form-check">
+                        <div class="icheck-primary form-check-inline btn-check check-teacher">
+                            <div class="toggle-password">
+                                {{ form.is_teacher }}
                             </div>
-                            نمایش گذرواژه
+                            ایا معلم هستید؟
                         </div>
                     </div>
-                    <!-- /.col -->
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">ثبت نام</button>
-                    </div>
-                    <!-- /.col -->
                 </div>
-                <div class="social-auth-links text-center mb-3">
+                <div class="mb-3 mr-auto ml-2">
                     <p></p>
                     {{ form.captcha }}
                 </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">ثبت نام</button>
+                </div>
             </form>
-
-            <div class="social-auth-links text-center">
-                <p>- OR -</p>
-                <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-block btn-danger">
-                    <i class="fab fa-google-plus mr-2"></i>
-                    ثبت نام با گوگل
-                </a>
+            <div class="mt-4">
+                <a href="{% url "account:login" %}" class="text-center">ایا از قبل حساب کاربر داشتین؟</a>
             </div>
-
-            <a href="{% url "account:login" %}" class="text-center">ایا از قبل حساب کاربر داشتین؟</a>
         </div>
         <!-- /.form-box -->
     </div><!-- /.card -->
@@ -118,27 +109,20 @@
 
 <!-- jQuery -->
 <script src="{% static "adminlte/plugins/jquery/jquery.min.js" %}"></script>
-<script src="{% static "js/vue.min.js" %}"></script>
 <!-- Bootstrap 4 -->
 <script src="{% static "adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
 <script>
-    new Vue({
-        el: "#app",
-        data: {
-            togglePassword: document.getElementsByClassName('toggle-password')
-        },
-        methods: {
-            changeEye: function () {
-                if (document.getElementById('password-field').type == "text") {
-                    document.getElementById('password-field').type = "password"
-                    this.togglePassword[0].classList.remove('active')
-                } else {
-                    document.getElementById('password-field').type = "text"
-                    this.togglePassword[0].classList.add('active')
-                }
-            }
+    function password() {
+        let pass = document.getElementById('pass');
+        let pass2 = document.getElementById('pass2');
+        if (document.getElementById('check').checked) {
+            pass.setAttribute('type', 'text');
+            pass2.setAttribute('type', 'text');
+        } else {
+            pass.setAttribute('type', 'password');
+            pass2.setAttribute('type', 'password');
         }
-    })
+    }
 </script>
 </body>
 </html>
