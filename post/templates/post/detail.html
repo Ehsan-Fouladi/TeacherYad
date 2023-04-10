@@ -58,7 +58,7 @@
         <h4 class="card-title"> نام: {{ object.username }}</h4>
         <h5 class="card-title">پایه: {{ object.Foundation }}</h5>
         <h5 class="card-comment"> رشته: {{ object.name_field }}</h5>
-        <h5 class="card-comment">رتبه کنکور: {{ object.entrance }}</h5>
+        {% if object.entrance %}<h5 class="card-comment">رتبه کنکور: {{ object.entrance }}</h5>{% else %}{% endif %}
         <h5 class="card-comment"> سابقه تحصیلی: {{ object.teaching }}</h5>
     </div>
     <div class="card-body">

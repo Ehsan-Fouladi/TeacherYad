@@ -13,7 +13,7 @@ from teacher.models import Teacher
 class LoginView(LoginRequirdMixins , FormView):
     template_name = 'account/login.html'
     form_class = LoginForm
-    success_url = reverse_lazy('home:home')
+    success_url = reverse_lazy('account:panel_user')
 
     def form_valid(self, form):
         cd = form.cleaned_data
@@ -21,7 +21,7 @@ class LoginView(LoginRequirdMixins , FormView):
         if user is not None:
             login(self.request, user, backend='django.contrib.auth.backends.ModelBackend')
             messages.success(self.request, 'شما با موفقیت وارد سایت شدید')
-            return redirect(reverse_lazy('home:home'))
+            return redirect(reverse_lazy('account:panel_user'))
         else:
             form.add_error("email", "اطلاعات شما نادرست است؟")
             return render(self.request, "account/login.html", {"form": form})
@@ -31,17 +31,17 @@ class LoginView(LoginRequirdMixins , FormView):
 class RegisterView(LoginRequirdMixins , FormView):
     template_name = 'account/register.html'
     form_class = RegisterForm
-    success_url = reverse_lazy('home:home')
+    success_url = reverse_lazy('account:panel_user')
 
     def form_valid(self, form):
         if self.request.user.is_authenticated == True:
-            return redirect(reverse('home:home'))
+            return redirect(reverse_lazy('account:panel_user'))
         else:
             cd = form.cleaned_data
             user = User.objects.create_user(email=cd['email'], is_teacher=cd['is_teacher'] , password=cd['password1'])
             login(self.request, user, backend='django.contrib.auth.backends.ModelBackend')
             messages.success(self.request, 'شما با موفقیت ثبت نام کرده اید')
-            return redirect(reverse_lazy('home:home'))
+            return redirect(reverse_lazy('account:panel_user'))
 
 
 # panel update list

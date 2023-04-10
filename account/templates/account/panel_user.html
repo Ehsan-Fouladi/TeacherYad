@@ -188,7 +188,11 @@
                                             <td>{{ teacher.username }}</td>
                                             <td>{{ teacher.name_field }}</td>
                                             <td>{{ teacher.Foundation }}</td>
+                                            {% if teacher.entrance %}
                                             <td>{{ teacher.entrance }}</td>
+                                            {% else %}
+                                                <td><span class="badge bg-danger">وارد نشده</span></td>
+                                            {% endif %}
                                             <td>{{ teacher.teaching }}</td>
                                             <td>{{ teacher.discription|striptags|truncatechars:20 }}</td>
                                             <td><img src="{{ teacher.image.url }}" width="120"></td>

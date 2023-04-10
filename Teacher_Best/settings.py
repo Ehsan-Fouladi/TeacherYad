@@ -92,7 +92,7 @@ DATABASES = {
 #         'PORT': '3306',
 #     }
 # }
-# Password validation
+
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -166,7 +166,6 @@ RECAPTCHA_PRIVATE_KEY = '6LeWtqAkAAAAAFhmxrAs9mIX5hZ5vtwCL0FZT-Zv'
 SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 
 # Reset_password email
-
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
