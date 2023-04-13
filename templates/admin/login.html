@@ -1,0 +1,85 @@
+{% load i18n static %}
+
+{% block usertools %}{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block nav-sidebar %}{% endblock %}
+
+{% block content_title %}{% endblock %}
+
+{% block nav-breadcrumbs %}{% endblock %}
+
+{% block content %}
+    <!doctype html>
+    <html lang="fa" dir="rtl">
+    <head>
+        <title>معلم یاد</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="{% static "admin-login/css/style.css" %}">
+
+    </head>
+    <body class="img js-fullheight" style="background-image: url({% static "admin-login/images/bg.jpg" %});">
+
+    {% if form.errors and not form.non_field_errors %}
+        <p class="errornote">
+            {% blocktranslate count counter=form.errors.items|length %}Please correct the error below.{% plural %}Please
+                correct the errors below.{% endblocktranslate %}
+        </p>
+    {% endif %}
+
+    {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>{{ error }}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <section class="ftco-section" style="padding: 5em 0">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center mb-5">
+                    <h2 class="heading-section">معلم یاد</h2>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-4">
+                    <div class="login-wrap p-0">
+                        <h3 class="mb-4 text-center">پنل ادمین</h3>
+                        <form action="{{ app_path }}" method="post" class="signin-form">{% csrf_token %}
+                            <div class="form-group">
+                                <span class="badge bg-danger">{{ form.username.errors }}</span>
+                                <div class="form-control">{{ form.username.label_tag }} {{ form.username }}</div>
+                            </div>
+                            <div class="form-group">
+                                <span class="badge bg-danger">{{ form.password.errors }}</span>
+                                <div class="form-control">{{ form.password.label_tag }} {{ form.password }}</div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="form-control btn btn-primary submit px-3">ورود</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="{% static "admin-login/js/jquery.min.js" %}"></script>
+    <script src="{% static "admin-login/js/popper.js" %}"></script>
+    <script src="{% static "admin-login/js/bootstrap.min.js" %}"></script>
+    <script src="{% static "admin-login/js/main.js" %}"></script>
+
+    </body>
+    </html>
+{% endblock %}
