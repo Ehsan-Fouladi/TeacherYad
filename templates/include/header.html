@@ -29,31 +29,4 @@
 <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css">
 <!-- Custom style for RTL -->
 <link rel="stylesheet" href="{% static "adminlte/dist/css/custom.css" %}">
-<style>
-    @font-face {
-        font-family: Vazir;
-        font-style: normal;
-        font-weight: normal;
-        src: url('{% static "fonts/Vazir.eot" %}');
-        src: url('{% static "fonts/Vazir.eot?#iefix" %}') format('embedded-opentype'),
-        url('{% static "fonts/Vazir.woff2" %}') format('woff2'),
-        url('{% static "fonts/Vazir.woff" %}') format('woff'),
-        url('{% static "fonts/Vazir.ttf" %}') format('truetype');
-    }
-
-    @font-face {
-        font-family: Vazir;
-        font-style: normal;
-        font-weight: bold;
-        src: url('{% static "fonts/Vazir-Bold.eot" %}');
-        src: url('{% static "fonts/Vazir-Bold.eot?#iefix" %}') format('embedded-opentype'),
-        url('{% static "fonts/Vazir-Bold.woff2" %}') format('woff2'),
-        url('{% static "fonts/Vazir-Bold.woff" %}') format('woff'),
-        url('{% static "fonts/Vazir-Bold.ttf" %}') format('truetype');
-    }
-
-    body {
-        font-family: 'Vazir', Arial, sans-serif;
-        font-weight: bold;
-    }
-</style>
+<link rel="stylesheet" href="{% static "css/font-vazir.css" %}">

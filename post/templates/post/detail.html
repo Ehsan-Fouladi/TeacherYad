@@ -15,35 +15,7 @@
     <link rel="stylesheet" href="{% static "css/style.css" %}">
     <link rel="stylesheet" href="{% static "css/hearts.css" %}">
     <!-- font web -->
-    <style>
-        @font-face {
-            font-family: Vazir;
-            font-style: normal;
-            font-weight: normal;
-            src: url('{% static "fonts/Vazir.eot" %}');
-            src: url('{% static "fonts/Vazir.eot?#iefix" %}') format('embedded-opentype'),
-            url('{% static "fonts/Vazir.woff2" %}') format('woff2'),
-            url('{% static "fonts/Vazir.woff" %}') format('woff'),
-            url('{% static "fonts/Vazir.ttf" %}') format('truetype');
-        }
-
-        @font-face {
-            font-family: Vazir;
-            font-style: normal;
-            font-weight: bold;
-            src: url('{% static "fonts/Vazir-Bold.eot" %}');
-            src: url('{% static "fonts/Vazir-Bold.eot?#iefix" %}') format('embedded-opentype'),
-            url('{% static "fonts/Vazir-Bold.woff2" %}') format('woff2'),
-            url('{% static "fonts/Vazir-Bold.woff" %}') format('woff'),
-            url('{% static "fonts/Vazir-Bold.ttf" %}') format('truetype');
-        }
-
-        body {
-            font-family: 'Vazir', Arial, sans-serif;
-            font-weight: normal;
-        }
-    </style>
-    <!-- font web -->
+    <link rel="stylesheet" href="{% static "css/font-vazir.css" %}">
 </head>
 <body>
 <div class="text-center">
@@ -63,7 +35,8 @@
     </div>
     <div class="card-body">
         <p class="card-text">{{ object.discription|safe }} {% if user.view_resume.url %}<a class="text text-primary"
-            href="{{ object.view_resume.url }}"> مشاهده رزومه</a>{% else %}{% endif %}</p>
+                                                                                           href="{{ object.view_resume.url }}">
+            مشاهده رزومه</a>{% else %}{% endif %}</p>
     </div>
     <div class="card-footer">
         <small class="text-muted">تاریخ ایجاد: {{ object.get_jalali_data }}</small>
