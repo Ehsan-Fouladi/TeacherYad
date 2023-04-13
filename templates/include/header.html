@@ -1,0 +1,59 @@
+{% load static %}
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>{% block title %}پنل کاربر{% endblock %}</title>
+<link rel="shortcut icon" type="image/x-icon" href="{% static "img/photo.jpg" %}">
+<!-- Tell the browser to be responsive to screen width -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="{% static "adminlte/plugins/fontawesome-free/css/all.min.css" %}">
+<!-- Ionicons -->
+<link rel="stylesheet" href="{% static "https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" %}">
+<!-- Tempusdominus Bbootstrap 4 -->
+<link rel="stylesheet"
+      href="{% static "adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css" %}">
+<!-- iCheck -->
+<link rel="stylesheet" href="{% static "adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css" %}">
+<!-- JQVMap -->
+<link rel="stylesheet" href="{% static "adminlte/plugins/jqvmap/jqvmap.min.css" %}">
+<!-- Theme style -->
+<link rel="stylesheet" href="{% static "adminlte/dist/css/adminlte.min.css" %}">
+<!-- overlayScrollbars -->
+<link rel="stylesheet" href="{% static "adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css" %}">
+<!-- Daterange picker -->
+<link rel="stylesheet" href="{% static "adminlte/plugins/daterangepicker/daterangepicker.css" %}">
+<!-- summernote -->
+<link rel="stylesheet" href="{% static "adminlte/plugins/summernote/summernote-bs4.css" %}">
+<!-- Bootstrap 4 RTL -->
+<link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css">
+<!-- Custom style for RTL -->
+<link rel="stylesheet" href="{% static "adminlte/dist/css/custom.css" %}">
+<style>
+    @font-face {
+        font-family: Vazir;
+        font-style: normal;
+        font-weight: normal;
+        src: url('{% static "fonts/Vazir.eot" %}');
+        src: url('{% static "fonts/Vazir.eot?#iefix" %}') format('embedded-opentype'),
+        url('{% static "fonts/Vazir.woff2" %}') format('woff2'),
+        url('{% static "fonts/Vazir.woff" %}') format('woff'),
+        url('{% static "fonts/Vazir.ttf" %}') format('truetype');
+    }
+
+    @font-face {
+        font-family: Vazir;
+        font-style: normal;
+        font-weight: bold;
+        src: url('{% static "fonts/Vazir-Bold.eot" %}');
+        src: url('{% static "fonts/Vazir-Bold.eot?#iefix" %}') format('embedded-opentype'),
+        url('{% static "fonts/Vazir-Bold.woff2" %}') format('woff2'),
+        url('{% static "fonts/Vazir-Bold.woff" %}') format('woff'),
+        url('{% static "fonts/Vazir-Bold.ttf" %}') format('truetype');
+    }
+
+    body {
+        font-family: 'Vazir', Arial, sans-serif;
+        font-weight: bold;
+    }
+</style>

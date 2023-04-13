@@ -11,6 +11,8 @@ class Teacher(models.Model):
     teaching = models.CharField(max_length=50, verbose_name=" چندسال سابقه تدریس")
     discription = models.TextField(verbose_name="توضیحات کوتاه")
     image = models.ImageField(upload_to='Teacher', verbose_name="عکس")
+    university = models.CharField(max_length=50, verbose_name="دانشگاه محل تحصیل")
+    section = models.CharField(max_length=50, verbose_name="مقطع")
     view_resume = models.FileField(upload_to='CV', verbose_name="ارسال رزومه", blank=True, null=True)
     is_teacher = models.BooleanField(verbose_name='ایا معلم هست؟', blank=True, null=True)
     data_time = models.DateTimeField(auto_now_add=True)

@@ -7,7 +7,8 @@ class FieldsUserMixin():
         if request.user.is_admin:
             self.fields = "__all__"
         elif request.user:
-            self.fields = ["username", "name_field", "Foundation", "discription", "image", "entrance", "teaching", "view_resume"]
+            self.fields = ["username", "name_field", "Foundation", "discription", "image",
+                           "entrance", "teaching", "view_resume", "university", "section"]
         else:
             return render(request, '404.html')
         return super(FieldsUserMixin, self).dispatch(request, *args, **kwargs)

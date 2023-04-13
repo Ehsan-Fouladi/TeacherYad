@@ -1,283 +1,226 @@
 {% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>پنل کاربر</title>
-    <link rel="shortcut icon" type="image/x-icon" href="{% static "img/photo.jpg" %}">
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="{% static "adminlte/plugins/fontawesome-free/css/all.min.css" %}">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="{% static "https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" %}">
-    <!-- Tempusdominus Bbootstrap 4 -->
-    <link rel="stylesheet"
-          href="{% static "adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css" %}">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="{% static "adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css" %}">
-    <!-- JQVMap -->
-    <link rel="stylesheet" href="{% static "adminlte/plugins/jqvmap/jqvmap.min.css" %}">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{% static "adminlte/dist/css/adminlte.min.css" %}">
-    <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="{% static "adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css" %}">
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href="{% static "adminlte/plugins/daterangepicker/daterangepicker.css" %}">
-    <!-- summernote -->
-    <link rel="stylesheet" href="{% static "adminlte/plugins/summernote/summernote-bs4.css" %}">
-    <!-- Bootstrap 4 RTL -->
-    <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css">
-    <!-- Custom style for RTL -->
-    <link rel="stylesheet" href="{% static "adminlte/dist/css/custom.css" %}">
-</head>
-<body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
-    <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
-            </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="{% url "home:home" %}" class="nav-link">صفحه اصلی</a>
-            </li>
-        </ul>
-    </nav>
-    <!-- /.navbar -->
+{% block html %}
+    <!DOCTYPE html>
+    <html>
+    <head>
+        {% include "include/header.html" %}
+    </head>
+    <body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="{% url "home:home" %}" class="nav-link">صفحه اصلی</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.navbar -->
 
-    <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
-        <!-- Brand Logo -->
-        <a href="{% url "home:home" %}" class="brand-link">
-            <img src="{% static "img/photo.jpg" %}" alt="AdminLTE Logo"
-                 class="brand-image img-circle elevation-3"
-                 style="opacity: .8">
-            <span class="brand-text font-weight-light">معلم یاد</span>
-        </a>
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="{% url "home:home" %}" class="brand-link">
+                <img src="{% static "img/photo.jpg" %}" alt="AdminLTE Logo"
+                     class="brand-image img-circle elevation-3"
+                     style="opacity: .8">
+                <span class="brand-text font-weight-light">معلم یاد</span>
+            </a>
 
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <!-- Sidebar user panel (optional) -->
-            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                {% if request.user.image.url != None %}
-                    <div class="text-center">
-                        <img class="profile-user-img img-fluid img-circle"
-                             src="{{ request.user.image.url }}"
-                             alt="User profile picture">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user panel (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    {% if request.user.image.url != None %}
+                        <div class="text-center">
+                            <img class="profile-user-img img-fluid img-circle"
+                                 src="{{ request.user.image.url }}"
+                                 alt="User profile picture">
+                        </div>
+                    {% else %}
+                        <div class="text-center">
+                            <img class="profile-user-img img-fluid img-circle"
+                                 src="{% static "img/profile.jpg" %}"
+                                 alt="User profile picture">
+                        </div>
+                    {% endif %}
+                    <div class="info">
+                        <a href="#" class="d-block">{{ request.user.email }}</a>
                     </div>
-                {% else %}
-                    <div class="text-center">
-                        <img class="profile-user-img img-fluid img-circle"
-                             src="{% static "img/profile.jpg" %}"
-                             alt="User profile picture">
-                    </div>
-                {% endif %}
-                <div class="info">
-                    <a href="#" class="d-block">{{ request.user.email }}</a>
                 </div>
-            </div>
 
-            <!-- Sidebar Menu -->
-            <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                    data-accordion="false">
-                    <!-- Add icons to the links using the .nav-icon class
-           with font-awesome or any other icon font library -->
-                    <li class="nav-item has-treeview menu-open">
-                        <a href="#" class="nav-link active">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
-                            <p>
-                                افزودن
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{% url "account:panel_user" %}" class="nav-link active">
-                                    <i class="fa fa-table nav-icon"></i>
-                                    <p>لیست</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{% url "account:panel_edit" %}" class="nav-link">
-                                    <i class="fa fa-edit nav-icon"></i>
-                                    <p>افزودن</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{% url "account:profile" %}" class="nav-link">
-                            <i class="nav-icon fa fa-user-astronaut"></i>
-                            <p>
-                                پروفایل
-                            </p>
-                        </a>
-                    </li>
-                    {% if user.is_admin %}
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-star"></i>
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+                        <li class="nav-item has-treeview menu-open">
+                            <a href="#" class="nav-link active">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                    vip
-                                    <span class="right badge badge-danger">New</span>
+                                    افزودن
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{% url "account:panel_user" %}" class="nav-link active">
+                                        <i class="fa fa-table nav-icon"></i>
+                                        <p>لیست</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{% url "account:panel_edit" %}" class="nav-link">
+                                        <i class="fa fa-edit nav-icon"></i>
+                                        <p>افزودن</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url "account:profile" %}" class="nav-link">
+                                <i class="nav-icon fa fa-user-astronaut"></i>
+                                <p>
+                                    پروفایل
                                 </p>
                             </a>
                         </li>
-                    {% endif %}
-                </ul>
-            </nav>
-            <!-- /.sidebar-menu -->
-        </div>
-        <!-- /.sidebar -->
-    </aside>
+                        {% if user.is_admin %}
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fa fa-star"></i>
+                                    <p>
+                                        vip
+                                        <span class="right badge badge-danger">New</span>
+                                    </p>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">داشبورد</h1>
-                    </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{% url "home:home" %}">خانه</a></li>
-                            <li class="breadcrumb-item active">لیست</li>
-                        </ol>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
-        <!-- /.content-header -->
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0 text-dark">داشبورد</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="{% url "home:home" %}">خانه</a></li>
+                                <li class="breadcrumb-item active">لیست</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
 
-        <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-                <!-- Small boxes (Stat box) -->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card card-primary">
-                            <div class="card-header">
-                                لیست
-                            </div>
-                            <!-- /.card-header -->
-                            <div class="card-body table-responsive p-0">
-                                <table class="table table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th>ایمیل</th>
-                                        <th>نام</th>
-                                        <th>رشته</th>
-                                        <th>پایه</th>
-                                        <th>رتبه کنکور</th>
-                                        <th>سابقه تحصیلی</th>
-                                        <th>توضیحات</th>
-                                        <th>عکس بند انگشتی</th>
-                                        <th>وعضیت</th>
-                                        <th>زمان انتشار</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {% for teacher in object_list %}
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <!-- Small boxes (Stat box) -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    لیست
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body table-responsive p-0">
+                                    <table class="table table-hover">
+                                        <thead>
                                         <tr>
-                                            <td>{{ teacher.user }}</td>
-                                            <td>{{ teacher.username }}</td>
-                                            <td>{{ teacher.name_field }}</td>
-                                            <td>{{ teacher.Foundation }}</td>
-                                            {% if teacher.entrance %}
-                                            <td>{{ teacher.entrance }}</td>
-                                            {% else %}
-                                                <td><span class="badge bg-danger">وارد نشده</span></td>
-                                            {% endif %}
-                                            <td>{{ teacher.teaching }}</td>
-                                            <td>{{ teacher.discription|striptags|truncatechars:20 }}</td>
-                                            <td><img src="{{ teacher.image.url }}" width="120"></td>
-                                            <td>
-                                                {% if teacher.is_teacher %}
-                                                    <span class="badge badge-info">تایید شد</span>
-                                                    <a target="_blank" class="badge badge-primary"
-                                                       href="{% url 'post:user_Detail' teacher.pk %}">نمایش</a>
-                                                    <a class="badge badge-success"
-                                                       href="{% url "account:panel_update" teacher.pk %}">بروزرسانی</a>
+                                            <th>ایمیل</th>
+                                            <th>نام</th>
+                                            <th>رشته تدرس</th>
+                                            <th>پایه</th>
+                                            <th>رتبه کنکور</th>
+                                            <th>سابقه تدریس</th>
+                                            <th>دانشگاه</th>
+                                            <th>منطق</th>
+                                            <th>توضیحات</th>
+                                            <th>عکس بند انگشتی</th>
+                                            <th>وعضیت</th>
+                                            <th>زمان انتشار</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for teacher in object_list %}
+                                            <tr>
+                                                <td>{{ teacher.user }}</td>
+                                                <td>{{ teacher.username }}</td>
+                                                <td>{{ teacher.name_field }}</td>
+                                                <td>{{ teacher.Foundation }}</td>
+                                                {% if teacher.entrance %}
+                                                    <td>{{ teacher.entrance }}</td>
                                                 {% else %}
-                                                    <span class="badge badge-danger">در انتضار تایید ادمین</span>
-                                                    {% if user.is_admin %}
+                                                    <td><span class="badge bg-danger">وارد نشده</span></td>
+                                                {% endif %}
+                                                <td>{{ teacher.teaching }}</td>
+                                                <td>{{ teacher.university }}</td>
+                                                <td>{{ teacher.section }}</td>
+                                                <td>{{ teacher.discription|striptags|truncatechars:20 }}</td>
+                                                <td><img src="{{ teacher.image.url }}" width="120"></td>
+                                                <td>
+                                                    {% if teacher.is_teacher %}
+                                                        <span class="badge badge-info">تایید شد</span>
+                                                        <a target="_blank" class="badge badge-primary"
+                                                           href="{% url 'post:user_Detail' teacher.pk %}">نمایش</a>
                                                         <a class="badge badge-success"
                                                            href="{% url "account:panel_update" teacher.pk %}">بروزرسانی</a>
-                                                        <a class="badge badge-warning"
-                                                           href="{% url "account:panel_Delete" teacher.pk %}">حذف</a>
+                                                    {% else %}
+                                                        <span class="badge badge-danger">در انتضار تایید ادمین</span>
+                                                        {% if user.is_admin %}
+                                                            <a class="badge badge-success"
+                                                               href="{% url "account:panel_update" teacher.pk %}">بروزرسانی</a>
+                                                            <a class="badge badge-warning"
+                                                               href="{% url "account:panel_Delete" teacher.pk %}">حذف</a>
+                                                        {% endif %}
                                                     {% endif %}
-                                                {% endif %}
-                                            </td>
-                                            <td>{{ teacher.get_jalali_data }}</td>
-                                        </tr>
-                                    {% endfor %}
-                                    </tbody>
-                                </table>
+                                                </td>
+                                                <td>{{ teacher.get_jalali_data }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
                             </div>
-                            <!-- /.card-body -->
+                            <!-- /.card -->
                         </div>
-                        <!-- /.card -->
                     </div>
-                </div>
-                <!-- /.row (main row) -->
-            </div><!-- /.container-fluid -->
-        </section>
-        <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-    <footer class="main-footer">
-        <div class="float-right d-none d-sm-inline-block">
-            <strong>هرگونه کپی برداری حرام است</strong>&copy;
+                    <!-- /.row (main row) -->
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
         </div>
-    </footer>
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="float-right d-none d-sm-inline-block">
+                <strong>هرگونه کپی برداری حرام است</strong>&copy;
+            </div>
+        </footer>
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
 
-<!-- jQuery -->
-<script src="{% static "adminlte/plugins/jquery/jquery.min.js" %}"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="{% static "adminlte/plugins/jquery-ui/jquery-ui.min.js" %}"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-    $.widget.bridge('uibutton', $.ui.button)
-</script>
-<!-- Bootstrap 4 rtl -->
-<script src="https://cdn.rtlcss.com/bootstrap/v4.2.1/js/bootstrap.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="{% static "adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
-<!-- ChartJS -->
-<script src="{% static "adminlte/plugins/chart.js/Chart.min.js" %}"></script>
-<!-- Sparkline -->
-<script src="{% static "adminlte/plugins/sparklines/sparkline.js" %}"></script>
-<!-- JQVMap -->
-<script src="{% static "adminlte/plugins/jqvmap/jquery.vmap.min.js" %}"></script>
-<script src="{% static "adminlte/plugins/jqvmap/maps/jquery.vmap.world.js" %}"></script>
-<!-- jQuery Knob Chart -->
-<script src="{% static "adminlte/plugins/jquery-knob/jquery.knob.min.js" %}"></script>
-<!-- daterangepicker -->
-<script src="{% static "adminlte/plugins/moment/moment.min.js" %}"></script>
-<script src="{% static "adminlte/plugins/daterangepicker/daterangepicker.js" %}"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="{% static "adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js" %}"></script>
-<!-- Summernote -->
-<script src="{% static "adminlte/plugins/summernote/summernote-bs4.min.js" %}"></script>
-<!-- overlayScrollbars -->
-<script src="{% static "adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js" %}"></script>
-<!-- AdminLTE App -->
-<script src="{% static "adminlte/dist/js/adminlte.js" %}"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{% static "adminlte/dist/js/pages/dashboard.js" %}"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{% static "adminlte/dist/js/demo.js" %}"></script>
-</body>
-</html>
+    {% include "include/footer.html" %}
+    </body>
+    </html>
+{% endblock %}

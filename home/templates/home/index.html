@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>معلم یاد</title>
+    <title>{% block title %}معلم یاد{% endblock %}</title>
     <link rel="shortcut icon" type="image/x-icon" href="{% static "img/photo.jpg" %}">
     <link rel="stylesheet" href="{% static "css/bootstrap.rtl.css" %}">
     <link rel="stylesheet" href="{% static "css/bootstrap.rtl.min.css" %}">
@@ -50,7 +50,8 @@
 {% if messages %}
     {% for message in messages %}
         <div class="alert alert-success alert-dismissible fade show" role="alert" dir="rtl">
-            <strong>{{ message }}</strong>
+            <strong>{{ message }}{% if request.user.is_authenticated %}{% block user %}کاربر {{ request.user }}
+            {% endblock %}{% else %}{% endif %}</strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     {% endfor %}
@@ -124,15 +125,16 @@
                 <div class="page-width-1 page-left">
                     <div class="d-flex position-relative tm-border-top tm-border-bottom intro-container">
                         {% for us in about %}
-                        <div class="intro-left tm-bg-dark">
-                            <h2 class="mb-4">{{ us.title }}</h2>
-                            <p class="mb-4">{{ us.subject|safe }}</p>
-                            <p class="mb-0">
-                        </div>
-                        <div class="intro-right">
-                            <img src="{{ us.image.url }}" alt="Image" class="img-fluid intro-img-1">
-                            <img src="{{ us.image2.url }}" alt="Image" class="img-fluid intro-img-2" width="300" height="300">
-                        </div>
+                            <div class="intro-left tm-bg-dark">
+                                <h2 class="mb-4">{{ us.title }}</h2>
+                                <p class="mb-4">{{ us.subject|safe }}</p>
+                                <p class="mb-0">
+                            </div>
+                            <div class="intro-right">
+                                <img src="{{ us.image.url }}" alt="Image" class="img-fluid intro-img-1">
+                                <img src="{{ us.image2.url }}" alt="Image" class="img-fluid intro-img-2" width="300"
+                                     height="300">
+                            </div>
                         {% endfor %}
                         <div class="circle intro-circle-1"></div>
                         <div class="circle intro-circle-2"></div>
@@ -160,7 +162,7 @@
                     <div class="mx-auto tm-border-top gallery-slider">
                         {% for teacher in teacher %}
                             {% if teacher.is_teacher %}
-                                <figure >
+                                <figure>
                                     <img src="{{ teacher.image.url }}" alt="Image">
                                     <figcaption>
                                         <div class="badge bg-primary">
@@ -184,9 +186,9 @@
                     <div class="tm-bg-dark content-pad">
                         <h2 class="mb-4">درباره ما</h2>
                         {% for us in about %}
-                        <p class="mb-4">
-                            <span>{{ us.description|safe }}</span>
-                        </p>
+                            <p class="mb-4">
+                                <span>{{ us.description|safe }}</span>
+                            </p>
                         {% endfor %}
                     </div>
                 </div>
@@ -224,15 +226,15 @@
                         </div>
                         <div class="col-md-6 tm-contact-left">
                             {% for us in about %}
-                            <p class="mb-4">
-                                {{ us.text|safe }}
-                            </p>
-                            <div dir="rtl">
-                                ایمیل: <a href="mailto:info@company.com" class="tm-link-white">{{ us.email }}</a>
-                            </div>
-                            <div class="tm-mb-45" dir="rtl">
-                                تلفن: <a href="tel:0100200340" class="tm-link-white">{{ us.phone }}</a>
-                            </div>
+                                <p class="mb-4">
+                                    {{ us.text|safe }}
+                                </p>
+                                <div dir="rtl">
+                                    ایمیل: <a href="mailto:info@company.com" class="tm-link-white">{{ us.email }}</a>
+                                </div>
+                                <div class="tm-mb-45" dir="rtl">
+                                    تلفن: <a href="tel:0100200340" class="tm-link-white">{{ us.phone }}</a>
+                                </div>
                             {% endfor %}
                         </div>
                     </div>
