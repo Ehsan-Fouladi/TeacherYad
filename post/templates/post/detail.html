@@ -29,14 +29,16 @@
     <div class="card-header">
         <h4 class="card-title"> نام: {{ object.username }}</h4>
         <h5 class="card-title">پایه: {{ object.Foundation }}</h5>
-        <h5 class="card-comment"> رشته: {{ object.name_field }}</h5>
+        <h5 class="card-comment"> رشته تدریس: {{ object.name_field }}</h5>
         {% if object.entrance %}<h5 class="card-comment">رتبه کنکور: {{ object.entrance }}</h5>{% else %}{% endif %}
+        <h5 class="card-comment"> دانشگاه: {{ object.university }}</h5>
+        <h5 class="card-comment"> مدرک: {{ object.evidence }}</h5>
         <h5 class="card-comment"> سابقه تدریس: {{ object.teaching }}</h5>
     </div>
     <div class="card-body">
-        <p class="card-text">{{ object.discription|safe }} {% if user.view_resume.url %}<a class="text text-primary"
-                                                                                           href="{{ object.view_resume.url }}">
-            مشاهده رزومه</a>{% else %}{% endif %}</p>
+        <p class="card-text">{{ object.discription|safe }} {% if object.view_resume %}<a class="text text-primary"
+                                                                                           href="{{ object.view_resume.url }}">مشاهده
+            رزومه</a>{% else %}{% endif %}</p>
     </div>
     <div class="card-footer">
         <small class="text-muted">تاریخ ایجاد: {{ object.get_jalali_data }}</small>
