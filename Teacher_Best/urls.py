@@ -18,8 +18,10 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.contrib.auth.urls import path
 from . import settings
+from templates.admin import views
 
 urlpatterns = [
+    path('admin/login/', views.LoginView.as_view()),
     path('admin/', admin.site.urls),
     path('', include("home.urls")),
     path('accounts/' , include('django.contrib.auth.urls')),

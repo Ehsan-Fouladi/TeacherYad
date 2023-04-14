@@ -12,13 +12,13 @@
 
 {% block content %}
     <!doctype html>
-    <html lang="fa" dir="rtl">
+    <html lang="fa">
     <head>
-        <title>معلم یاد</title>
+        <title>panel login admin</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+        <link rel="shortcut icon" type="image/x-icon" href="{% static "img/photo.jpg" %}">
+        <link rel="stylesheet" href="{% static "css/font-vazir.css" %}">
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -28,14 +28,18 @@
     <body class="img js-fullheight" style="background-image: url({% static "admin-login/images/bg.jpg" %});">
 
     {% if form.errors and not form.non_field_errors %}
-        <p class="errornote">
-            {% blocktranslate count counter=form.errors.items|length %}Please correct the error below.{% plural %}Please
-                correct the errors below.{% endblocktranslate %}
-        </p>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>{% blocktranslate count counter=form.errors.items|length %}Please correct the error below.
+                {% plural %}Please
+                correct the errors below.{% endblocktranslate %}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     {% endif %}
 
-    {% if form.non_field_errors %}
-        {% for error in form.non_field_errors %}
+    {% if form.errors %}
+        {% for error in form.email.errors %}
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong>{{ error }}</strong>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -58,12 +62,12 @@
                         <h3 class="mb-4 text-center">پنل ادمین</h3>
                         <form action="{{ app_path }}" method="post" class="signin-form">{% csrf_token %}
                             <div class="form-group">
-                                <span class="badge bg-danger">{{ form.username.errors }}</span>
-                                <div class="form-control">{{ form.username.label_tag }} {{ form.username }}</div>
+                                {{ form.email }}
                             </div>
                             <div class="form-group">
-                                <span class="badge bg-danger">{{ form.password.errors }}</span>
-                                <div class="form-control">{{ form.password.label_tag }} {{ form.password }}</div>
+                                {{ form.password }}
+                                <span toggle="#password-field"
+                                      class="fa fa-fw fa-eye field-icon toggle-password"></span>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="form-control btn btn-primary submit px-3">ورود</button>
