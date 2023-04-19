@@ -4,6 +4,7 @@ from django.views.generic import ListView, DetailView
 from teacher.models import Teacher
 from .models import Like
 from django.http import JsonResponse
+from hitcount.views import HitCountDetailView
 
 
 class ListDetailView(ListView):
@@ -14,9 +15,10 @@ class ListDetailView(ListView):
     template_name = 'post/list_detail.html'
 
 
-class DetailView(DetailView):
+class DetailView(HitCountDetailView, DetailView):
     model = Teacher
     template_name = 'post/detail.html'
+    count_hit = True
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

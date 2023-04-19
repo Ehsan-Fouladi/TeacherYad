@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'captcha',
     'ckeditor',
     'jalali_date',
+    'hitcount',
     # My_Apps
     'home.apps.HomeConfig',
     'account.apps.AccountConfig',

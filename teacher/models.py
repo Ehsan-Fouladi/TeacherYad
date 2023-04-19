@@ -2,6 +2,8 @@ from django.db import models
 from account.models import User
 from django.utils.html import format_html
 from jalali_date import datetime2jalali
+from django.contrib.contenttypes.fields import GenericRelation
+from hitcount.models import HitCount
 class Teacher(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_teacher', default=False)
     username = models.CharField(unique=True, max_length=100, verbose_name="نام")
@@ -15,6 +17,7 @@ class Teacher(models.Model):
     evidence = models.CharField(max_length=50, verbose_name="مدرک")
     view_resume = models.FileField(upload_to='CV', verbose_name="ارسال رزومه", blank=True, null=True)
     is_teacher = models.BooleanField(verbose_name='ایا معلم هست؟', blank=True, null=True)
+    hit_count = GenericRelation(HitCount, object_id_field='object_pk', related_query_name='hit_count_generic')
     data_time = models.DateTimeField(auto_now_add=True)
 
     def shoe_image(self):
