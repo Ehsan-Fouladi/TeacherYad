@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'jalali_date',
     'hitcount',
+    'star_ratings',
     # My_Apps
     'home.apps.HomeConfig',
     'account.apps.AccountConfig',
@@ -160,6 +161,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'account.User'
 
 AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',)
+
+# star RATINGS
+STAR_RATINGS_STAR_HEIGHT = 20
+STAR_RATINGS_STAR_WIDTH = 20
+STAR_RATINGS_RERATE = False
 
 # google recaptcha
 RECAPTCHA_PUBLIC_KEY = '6LeWtqAkAAAAAPMfnHJjIKqdYdiTi78C7Q0MrDJH'
