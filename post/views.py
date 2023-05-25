@@ -3,8 +3,9 @@ from django.shortcuts import redirect, render
 from django.views.generic import ListView, DetailView
 from teacher.models import Teacher
 from .models import Like
-from django.http import JsonResponse
 from hitcount.views import HitCountDetailView
+from django.db.models import Q
+from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 
 
 class ListDetailView(ListView):
@@ -33,7 +34,10 @@ class DetailView(HitCountDetailView, DetailView):
 
 def SearchListView(request):
     q = request.GET.get('q')
-    teacher = Teacher.objects.filter(name_field__icontains=q)
+    teacher = Teacher.objects.filter(Q(name_field__icontains=q) | Q(discription__icontains=q))
+    # vector = SearchVector("name_field", "discription")
+    # query = SearchQuery(q, search_type='websearch')
+    # teacher = Teacher.objects.annotate(search=vector, rank=SearchRank(vector, query)).filter(search=query).order_by("-rank")
     page_number = request.GET.get('page')
     paginator = Paginator(teacher, 3)
     object_list = paginator.get_page(page_number)
