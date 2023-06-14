@@ -7,6 +7,7 @@ from .forms import LoginForm, RegisterForm, ProfileForm
 from .models import User
 from .mixins import FieldsUserMixin, FormValidMixin, LoginRequirdMixins, LogoutRequirdMixins, TeacherRequirdMixins, UpdateMixin, SuperUserMixin
 from teacher.models import Teacher
+from django.contrib.messages.views import SuccessMessageMixin
 
 
 # Login user
@@ -45,10 +46,11 @@ class RegisterView(LoginRequirdMixins , FormView):
 
 
 # panel update list
-class ProfileView(LogoutRequirdMixins , UpdateView):
+class ProfileView(SuccessMessageMixin, LogoutRequirdMixins, UpdateView):
     success_url = reverse_lazy('account:panel_user')
     model = User
     form_class = ProfileForm
+    success_message = 'پروفایل شما با موفقیت بروزرسانی شد!'
     template_name = 'account/profile.html'
 
     def get_object(self):
@@ -56,7 +58,7 @@ class ProfileView(LogoutRequirdMixins , UpdateView):
 
 
 # panel view user
-class PanelUserView(TeacherRequirdMixins , LogoutRequirdMixins , ListView):
+class PanelUserView(TeacherRequirdMixins, LogoutRequirdMixins, ListView):
     template_name = 'account/panel_user.html'
 
     def get_queryset(self):
@@ -69,20 +71,22 @@ class PanelUserView(TeacherRequirdMixins , LogoutRequirdMixins , ListView):
 
 
 # panel edit article
-class PanelEditView(TeacherRequirdMixins , LogoutRequirdMixins , FieldsUserMixin, FormValidMixin, CreateView):
+class PanelEditView(SuccessMessageMixin, TeacherRequirdMixins, LogoutRequirdMixins, FieldsUserMixin, FormValidMixin, CreateView):
     model = Teacher
     success_url = reverse_lazy('account:panel_user')
+    success_message = 'مقاله شما با موفقیت ایجاد شد.'
     template_name = 'account/panel_edit.html'
 
 
 # panel update article
-class PanelUpdate(TeacherRequirdMixins ,LogoutRequirdMixins , FieldsUserMixin, FormValidMixin, UpdateMixin, UpdateView):
+class PanelUpdate(SuccessMessageMixin, TeacherRequirdMixins, LogoutRequirdMixins, FieldsUserMixin, UpdateMixin, UpdateView):
     model = Teacher
     success_url = reverse_lazy('account:panel_user')
+    success_message = 'مقاله شما با موفقیت بروزرسانی شد'
     template_name = 'account/panel_edit.html'
 
 
-class PanelDelete(TeacherRequirdMixins , LogoutRequirdMixins , SuperUserMixin, DeleteView):
+class PanelDelete(TeacherRequirdMixins, LogoutRequirdMixins, SuperUserMixin, DeleteView):
     model = Teacher
     success_url = reverse_lazy('account:panel_user')
     template_name = 'account/panel_delete.html'

@@ -21,7 +21,24 @@
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags %}
+                    {% if message.tags == "success" %}
+                        <script src="{% static "javascript/sweatalert.min.js" %}"></script>
+                        <script>
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: '{{ message.tags }}',
+                                title: '{{ message }}',
+                                showConfirmButton: false,
+                                timer: 3000
+                            })
+                            </script>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
 
         <!-- Sidebar -->
         {% include "include/sidebar.html" %}
