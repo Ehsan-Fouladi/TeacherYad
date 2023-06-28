@@ -20,15 +20,17 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "admin_notification",
     'admin_persian',
+    'django_cleanup.apps.CleanupConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     # My_package
-    'django_cleanup.apps.CleanupConfig',
     'crispy_forms',
     "crispy_bootstrap5",
     'captcha',
@@ -36,6 +38,7 @@ INSTALLED_APPS = [
     'jalali_date',
     'hitcount',
     'star_ratings',
+    
     # My_Apps
     'home.apps.HomeConfig',
     'account.apps.AccountConfig',
@@ -179,6 +182,9 @@ STAR_RATINGS_STAR_HEIGHT = 20
 STAR_RATINGS_STAR_WIDTH = 20
 STAR_RATINGS_RERATE = False
 
+# Admin notification 
+NOTIFICATION_MODEL = 'post.Like'
+
 # google recaptcha
 RECAPTCHA_PUBLIC_KEY = '6LeWtqAkAAAAAPMfnHJjIKqdYdiTi78C7Q0MrDJH'
 RECAPTCHA_PRIVATE_KEY = '6LeWtqAkAAAAAFhmxrAs9mIX5hZ5vtwCL0FZT-Zv'
@@ -188,33 +194,7 @@ SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-    'ROTATE_REFRESH_TOKENS': False,
-    'BLACKLIST_AFTER_ROTATION': False,
-    'UPDATE_LAST_LOGIN': False,
-
-    'ALGORITHM': 'HS256',
-    'SIGNING_KEY': SECRET_KEY,
-    'VERIFYING_KEY': None,
-    'AUDIENCE': None,
-    'ISSUER': None,
-    'JWK_URL': None,
-    'LEEWAY': 0,
-
-    'AUTH_HEADER_TYPES': ('Bearer',),
-    'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
-    'USER_ID_FIELD': 'id',
-    'USER_ID_CLAIM': 'user_id',
-    'USER_AUTHENTICATION_RULE': 'rest_framework_simplejwt.authentication.default_user_authentication_rule',
-
-    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
-    'TOKEN_TYPE_CLAIM': 'token_type',
-    'TOKEN_USER_CLASS': 'rest_framework_simplejwt.models.TokenUser',
-
-    'JTI_CLAIM': 'jti',
-
-    'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
-    'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
-    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+    'AUTH_HEADER_TYPES': ('Bearer',)
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

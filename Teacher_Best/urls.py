@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 from django.contrib.auth.urls import path
 from . import settings
 from templates.admin import views
+from admin_notification.views import check_notification_view
 
 urlpatterns = [
     path('admin/login/', views.LoginView.as_view()),
@@ -14,4 +15,5 @@ urlpatterns = [
     path('articles/', include("post.urls")),
     path('hitcount/', include('hitcount.urls', namespace='hitcount')),
     path('ratings/', include('star_ratings.urls', namespace='ratings')),
+    path('check/notification', check_notification_view, name="check_notifications"),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
