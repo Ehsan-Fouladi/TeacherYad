@@ -25,9 +25,9 @@
                         <script src="{% static "javascript/sweatalert.min.js" %}"></script>
                             <script>
                                 Swal.fire({
-                                    position: 'top-start',
+                                    position: 'center',
                                     icon: '{{ message.tags }}',
-                                    title: '{{ message }} {% if request.user.is_authenticated %}{{request.user.email}}{% endif %}',
+                                    title: '{{ message }}',
                                     showConfirmButton: false,
                                     timer: 4000
                                 })
